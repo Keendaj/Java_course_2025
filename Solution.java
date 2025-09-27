@@ -1,4 +1,3 @@
-
 /**
  * Старт моего проекта
  * @author Dmitriy Shevtsov

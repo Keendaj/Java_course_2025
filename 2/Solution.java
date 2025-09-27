@@ -43,5 +43,10 @@ public class Solution {
             System.out.println("PyramidalChair");
             ((PyramidalChair)chair2).pyramidalSit();
         }
+
+        chair2 = null;
+        System.out.println(null instanceof Chair); // false
+        System.out.println(chair2 instanceof Chair); //false -> можно использовать также как проверку на null
+
     }
 }
