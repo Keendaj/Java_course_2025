@@ -15,7 +15,7 @@ public class Solution {
     public static void wannaSit(Chair chair)
     {
         System.out.println("I'm so tired, i wanna sit");
-        chair.sit();
+        chair.sit();//Можем сесть как на стул, так и на его наследников
     }
 
     public static void main(String[] args) {
