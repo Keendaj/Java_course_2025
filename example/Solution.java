@@ -3,8 +3,18 @@ package example;
 import example.other.OtherTest;
 import example.other.SubTest;
 
-
+/**
+ * Старт моего проекта
+ * @author Dmitriy Shevtsov
+* @verision 1.0
+* @since 2025
+ */
 public class Solution {
+     /**
+     * @param args
+     * @return void
+     * @see Показывает использование спецификаций
+     */
     public static void main(String[] args) {
         System.out.println("=== Пример спецификаторов доступа ===");
 

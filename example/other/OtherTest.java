@@ -3,6 +3,11 @@ package example.other;
 import example.Test;
 
 public class OtherTest {
+    /**
+     * @param args
+     * @return void
+     * @see Показывает, доступ для класса из другого пакета
+     */
     public void testAccess() {
         Test obj = new Test();
 
