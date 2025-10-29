@@ -1,5 +1,3 @@
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Старт моего проекта
@@ -9,41 +7,52 @@ import java.util.List;
  */
 public class Solution {
     
-    public static void printNumbers(int... numbers) {
-        System.out.print("Числа: ");
-        for (int num : numbers) {
-            System.out.print(num + " ");
+    public enum CoffeeSize {
+        SMALL(200, 100),
+        MEDIUM(300, 150), 
+        LARGE(500, 200);
+
+        private final int ml;
+        private final int price;
+
+        CoffeeSize(int ml, int price) {
+            this.ml = ml;
+            this.price = price;
         }
-        System.out.println();
-    }
-    
-    public static void printNumbers(String... strings) {
-        System.out.print("Строки: ");
-        for (String str : strings) {
-            System.out.print(str + " ");
+
+        public int getMl() {
+            return ml;
         }
-        System.out.println();
+
+        public int getPrice() {
+            return price;
+        }
     }
 
-    public static void printNumbers(String message, int... numbers) {
-        System.out.print(message + ": ");
-        for (int num : numbers) {
-            System.out.print(num + " ");
-        }
-        System.out.println();
+    public enum Color {
+        RED, GREEN, BLUE, YELLOW, BLACK, WHITE
     }
 
     /**
      * @param args
      * @return void
-     * @see Показывает примеры работы перегрузками в функциях с переменным число аргументов. 
+     * @see Показывает примеры работы с enum. 
      */
     public static void main(String[] args) {
-        printNumbers(1, 2, 3);                    
-        printNumbers("A", "B", "C");              
-        printNumbers("Результат", 10, 20, 30);    
-        printNumbers(42);                        
-        //printNumbers("Один"); <- попадает под сразу 2 перегрузки                     
-        //printNumbers(); <- попадает под сразу 2 перегрузки
+        System.out.println("\n=== ПРИМЕР 1: обычный enum ===");
+        Color favoriteColor = Color.BLUE;
+        System.out.println("Мой любимый цвет: " + favoriteColor);
+        
+        for (Color color : Color.values()) {
+            System.out.println("Цвет: " + color);
+        }
+
+        System.out.println("=== ПРИМЕР 2: enum с заданными значениями ===");
+        CoffeeSize myCoffee = CoffeeSize.LARGE;
+        System.out.println("Мой кофе: " + myCoffee + " - " + myCoffee.getMl() + " мл, " + myCoffee.getPrice() + " руб.");
+        
+        for (CoffeeSize size : CoffeeSize.values()) {
+            System.out.println(size + ": " + size.getMl() + " мл, " + size.getPrice() + " руб.");
+        }
     }
 }
