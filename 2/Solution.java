@@ -36,7 +36,7 @@ public class Solution {
     /**
      * @param args
      * @return void
-     * @see Исправление конструктора. 
+     * @see Показывает примеры работы с super. 
      */
     public static void main(String[] args) {
         System.out.println("Done!");
