@@ -1,23 +1,26 @@
-interface MyInterface {
-    void interfaceMethod(); 
-
-    static class Calculator {
-        public static int add(int a, int b) {
-            return a + b;
-        }
-        
-        public static int multiply(int a, int b) {
-            return a * b;
-        }
+class Parent {
+    public void display() {
+        System.out.println("Parent method");
+    }
+    
+    @Deprecated //Помечает метод как устаревший, при вызове напрямую выдаст предупреждение
+    public void oldMethod() {
+        System.out.println("This method is deprecated");
     }
 }
 
-class MyImplementation implements MyInterface {
-    @Override
-    public void interfaceMethod() {
-        System.out.println("Implemented interface method");
+class Child extends Parent {
+    @Override // Говорит о переопределении старого метода
+    public void display() {
+        System.out.println("Child method");
+    }
+
+    @SuppressWarnings("deprecation") //Убирает предупреждение об устаревшести метода (в целом убирает конкретное предупреждение)
+    public void useDeprecatedMethod() {
+        oldMethod();
     }
 }
+
 
 /**
  * Старт моего проекта
@@ -30,18 +33,15 @@ public class Solution {
     /**
      * @param args
      * @return void
-     * @see Показывает пример для интерфейсом и вложенными классами
+     * @see Показывает пример работы с Аннтоациями
      */
     public static void main(String[] args) {
-
-        int sum = MyInterface.Calculator.add(5, 3);
-        int product = MyInterface.Calculator.multiply(5, 3);
+        Child child = new Child();
+        child.display();
         
-        System.out.println("5 + 3 = " + sum);
-        System.out.println("5 * 3 = " + product);
+        child.useDeprecatedMethod(); 
         
-        MyImplementation impl = new MyImplementation();
-        impl.interfaceMethod();
-        //impl.Calculator.add(5, 3); Ошибка
+        @SuppressWarnings("unchecked")
+        java.util.List<String> list = new java.util.ArrayList();
     }
 }
