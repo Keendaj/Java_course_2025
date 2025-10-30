@@ -1,47 +1,10 @@
-class Vehicle {
-    protected String brand = "Unknown";
-    protected int maxSpeed;
-    
-    public Vehicle(int maxSpeed) {
-        this.maxSpeed = maxSpeed;
-        System.out.println("Vehicle constructor called");
+class Calculator {
+    public int add(int a, int b) {
+        return a + b;
     }
 
-    public void displayInfo() {
-        System.out.println("Brand: " + brand + ", Max Speed: " + maxSpeed + " km/h");
-    }
-    
-    public void startEngine() {
-        System.out.println("Vehicle engine started");
-    }
-}
-
-class Car extends Vehicle {
-    private int doors;
-
-    public Car(int maxSpeed, int doors) {
-        super(maxSpeed);
-        this.doors = doors;
-        this.brand = "Toyota";
-    }
-    
-    public void showCarDetails() {
-        System.out.println("Car brand from superclass: " + super.brand);
-        System.out.println("Number of doors: " + this.doors);
-        
-        super.displayInfo();
-        displayInfo();
-    }
-
-    @Override
-    public void displayInfo() {
-        System.out.println("Overrided");
-    }
-
-    @Override
-    public void startEngine() {
-        super.startEngine();
-        System.out.println("Car specific engine procedures completed");
+    public int add(int a, int b, int c) {
+        return a + b + c;
     }
 }
 
@@ -56,12 +19,12 @@ public class Solution {
     /**
      * @param args
      * @return void
-     * @see Показывает примеры работы с super. 
+     * @see Показывает примеры работы с перегруженными методами. 
      */
     public static void main(String[] args) {
-        Car car = new Car(200, 4);
-        car.showCarDetails();
-        System.out.println("---");
-        car.startEngine();
+        Calculator calc = new Calculator();
+        
+        System.out.println("add(5, 3): " + calc.add(5, 3));
+        System.out.println("add(1, 2, 3): " + calc.add(1, 2, 3));
     }
 }

@@ -1,28 +1,47 @@
-class A {
-  int a;
-  int b;
-  int c;
-  int z;
+class Animal {
+    public void makeSound() {
+        System.out.println("Animal makes a sound");
+    }
+    
+    public String getName() {
+        return "Unknown Animal";
+    }
+    
+    public Animal getInstance() {
+        return new Animal();
+    }
+}
 
-  public A() {
-    this.z = 1;
-  }
+class Dog extends Animal {
+    /* 
+    Ошибки, которые будут выявлены
+    @Override
+    public void makeSound(String name) {
+        System.out.println("Dog barks");
+    }
 
-  public A(int a) {
-    this();
-    this.a = a;
-  }
+    @Override
+    public void mkeSound() { <- метода с таким названием просто нет в родителе
+        System.out.println("Dog barks");
+    }
+    */
 
-  public A(int a, int b) {
-    this(a);
-    this.b = b;
-  }
+    @Override
+    public void makeSound() {
+        System.out.println("Dog barks");
+    }
 
-  public A(int a, int b, int c) {
-    this(a, b);
-    this.c = c;
-  }
 
+
+    @Override
+    public String getName() {
+        return "Dog";
+    }
+
+    @Override
+    public Dog getInstance() {
+        return new Dog();
+    }
 }
 
 /**
@@ -36,9 +55,16 @@ public class Solution {
     /**
      * @param args
      * @return void
-     * @see Исправление конструктора. 
+     * @see Показывает примеры исправления ошибок с Override. 
      */
     public static void main(String[] args) {
-        System.out.println("Done!");
+        Animal myAnimal = new Dog();
+        myAnimal.makeSound();
+
+        Animal animal = new Animal();
+        Dog dog = new Dog();
+        
+        animal.makeSound();
+        dog.makeSound();
     }
 }
