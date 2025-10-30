@@ -1,3 +1,24 @@
+interface MyInterface {
+    void interfaceMethod(); 
+
+    static class Calculator {
+        public static int add(int a, int b) {
+            return a + b;
+        }
+        
+        public static int multiply(int a, int b) {
+            return a * b;
+        }
+    }
+}
+
+class MyImplementation implements MyInterface {
+    @Override
+    public void interfaceMethod() {
+        System.out.println("Implemented interface method");
+    }
+}
+
 /**
  * Старт моего проекта
  * @author Dmitriy Shevtsov
@@ -9,20 +30,18 @@ public class Solution {
     /**
      * @param args
      * @return void
-     * @see Показывает пример для спецификаторов и inner классов
+     * @see Показывает пример для интерфейсом и вложенными классами
      */
     public static void main(String[] args) {
-        OuterClass outer = new OuterClass();
-        
-        OuterClass.PublicInner publicInner = outer.new PublicInner();
-        publicInner.show();
-        
-        //OuterClass.ProtectedInner protectedInner = outer.new ProtectedInner(); // Ошибка компиляции
-        
-        //OuterClass.PackagePrivateInner packageInner = outer.new PackagePrivateInner(); // Ошибка компиляции
 
-        //OuterClass.PrivateInner privateInner = outer.new PrivateInner(); // Ошибка компиляции
+        int sum = MyInterface.Calculator.add(5, 3);
+        int product = MyInterface.Calculator.multiply(5, 3);
         
-        outer.testInnerClasses();
+        System.out.println("5 + 3 = " + sum);
+        System.out.println("5 * 3 = " + product);
+        
+        MyImplementation impl = new MyImplementation();
+        impl.interfaceMethod();
+        //impl.Calculator.add(5, 3); Ошибка
     }
 }
