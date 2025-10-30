@@ -1,24 +1,16 @@
-class Parent {
-    public void display() {
-        System.out.println("Parent method");
+interface IBase {
+
+    default void sayHello() {
+        System.out.println("default method!");
     }
-    
-    @Deprecated //Помечает метод как устаревший, при вызове напрямую выдаст предупреждение
-    public void oldMethod() {
-        System.out.println("This method is deprecated");
+
+    static void sayGoodbye() {
+        System.out.println("static method!");
     }
 }
 
-class Child extends Parent {
-    @Override // Говорит о переопределении старого метода
-    public void display() {
-        System.out.println("Child method");
-    }
-
-    @SuppressWarnings("deprecation") //Убирает предупреждение об устаревшести метода (в целом убирает конкретное предупреждение)
-    public void useDeprecatedMethod() {
-        oldMethod();
-    }
+class Base implements IBase {
+    //Можем так и оставить
 }
 
 
@@ -33,15 +25,15 @@ public class Solution {
     /**
      * @param args
      * @return void
-     * @see Показывает пример работы с Аннтоациями
+     * @see Показывает пример работы с default и static в interface
      */
     public static void main(String[] args) {
-        Child child = new Child();
-        child.display();
+        Base greeter = new Base();
         
-        child.useDeprecatedMethod(); 
+        greeter.sayHello(); 
         
-        @SuppressWarnings("unchecked")
-        java.util.List<String> list = new java.util.ArrayList();
+        IBase.sayGoodbye(); 
+
+        // Base.sayGoodbye();
     }
 }
