@@ -1,4 +1,7 @@
-import java.io.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Locale;
+import java.util.Scanner;
 /**
  * Демонстрация работы со StringBuilder
  * @author Dmitriy Shevtsov
@@ -10,21 +13,24 @@ public class Solution {
     /**
      * @param args
      * @return void
-     * @see Показывает пример работы с InputStream 
+     * @see Показывает пример работы с Scanner
      */
     public static void main(String[] args) {
-        byte[] data = {65, 66, 67, 68, 69};
-        
-        try (ByteArrayInputStream input = new ByteArrayInputStream(data)) {
-            int byteRead;
-            System.out.println("Чтение байтов по одному:");
+        try (Scanner fileScanner = new Scanner(new File("data.txt"))) {
+            fileScanner.useLocale(Locale.US);//Точка разделитель
 
-            while ((byteRead = input.read()) != -1) {
-                System.out.println("Прочитан байт: " + byteRead + 
-                                 " -> символ: '" + (char)byteRead + "'");
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
+            String word = fileScanner.next();   
+            int number = fileScanner.nextInt();      
+            double decimal = fileScanner.nextDouble();
+            boolean flag = fileScanner.nextBoolean(); 
+            
+            System.out.println("Слово: " + word);
+            System.out.println("Число: " + number);
+            System.out.println("Дробное: " + decimal);
+            System.out.println("Флаг: " + flag);
+            
+        } catch (FileNotFoundException e) {
+            System.out.println("Файл не найден!");
         }
     }
 }
