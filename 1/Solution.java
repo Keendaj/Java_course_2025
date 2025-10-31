@@ -7,55 +7,48 @@ import java.util.Date;
  * @since 2025
  */
 public class Solution {
-    static class Exception2 extends RuntimeException {
-        public Exception2(String message) {
-            super(message);
-        }
-    }
+    static class AgeValidationException extends Exception {
+        private final int enteredAge;
 
-    static class Exception3 extends Exception2 {
-        public Exception3(String message) {
-            super(message);
+        public AgeValidationException() {
+            super("Ошибка валидации возраста");
+            this.enteredAge = 0;
         }
-    }
-    public static void someMethod1(int value) {
-        if (value == 0) {
-            throw new ArithmeticException("Деление на ноль");
-        }
-        if (value < 0) {
-            throw new IllegalArgumentException("Отрицательное значение");
-        }
-    }
-    
-    public static void someMethod2(int value) {
-        if (value < -10) {
-            throw new Exception3("Очень специфическая ошибка");
-        } else if (value < 0) {
-            throw new Exception2("Общая ошибка данных");
-        }
-    }
 
+        public AgeValidationException(String message) {
+            super(message);
+            this.enteredAge = 0;
+        }
+
+        public AgeValidationException(String message, int age) {
+            super(message);
+            this.enteredAge = age;
+        }
+
+        public int getEnteredAge() {
+            return enteredAge;
+        }
+}
+    public static void validateAge(int age) throws AgeValidationException {
+        if (age < 0) {
+            throw new AgeValidationException("Возраст не может быть отрицательным", age);
+        }
+        if (age > 150) {
+            throw new AgeValidationException("Возраст слишком большой", age);
+        }
+        System.out.println("Возраст корректен: " + age);
+    }
     /**
      * @param args
      * @return void
-     * @see Показывает пример работы с исключениями
+     * @see Показывает пример работы с собственным исключением
      */
     public static void main(String[] args) {
-        System.out.println("=== Ситуация 1: Одинаковая обработка разных исключений ===");
-        
         try {
-            someMethod1(0);
-        } catch (ArithmeticException | IllegalArgumentException e) {
-
-            System.out.println("Ошибка в вычислениях: " + e.getMessage());
-        }
-        
-        System.out.println("\n=== Ситуация 2: Иерархия исключений ===");
-        
-        try {
-            someMethod2(-1);
-        } catch (RuntimeException e) { //Можно поменять на Exception2
-            System.out.println("Ошибка: " + e.getMessage());
+            validateAge(25);  // OK
+            validateAge(-5);  // Выбросит исключение
+        } catch (AgeValidationException e) {
+            System.out.println("Поймано AgeValidationException: " + e.getMessage() + ", с возрастом: " + e.getEnteredAge());
         }
     }
 }
