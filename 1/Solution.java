@@ -7,9 +7,31 @@ import java.util.Date;
  * @since 2025
  */
 public class Solution {
-    public static void setAge(int age) {
-        if (age < 0) {
-            throw new IllegalArgumentException("Возраст не может быть отрицательным");
+    static class Exception2 extends RuntimeException {
+        public Exception2(String message) {
+            super(message);
+        }
+    }
+
+    static class Exception3 extends Exception2 {
+        public Exception3(String message) {
+            super(message);
+        }
+    }
+    public static void someMethod1(int value) {
+        if (value == 0) {
+            throw new ArithmeticException("Деление на ноль");
+        }
+        if (value < 0) {
+            throw new IllegalArgumentException("Отрицательное значение");
+        }
+    }
+    
+    public static void someMethod2(int value) {
+        if (value < -10) {
+            throw new Exception3("Очень специфическая ошибка");
+        } else if (value < 0) {
+            throw new Exception2("Общая ошибка данных");
         }
     }
 
@@ -19,16 +41,21 @@ public class Solution {
      * @see Показывает пример работы с исключениями
      */
     public static void main(String[] args) {
-         try {
-            int[] numbers = {1, 2, 3};
-            System.out.println("Обращаемся к элементу массива: " + numbers[5]);
-        } catch (ArrayIndexOutOfBoundsException e) {
-            System.out.println("Исключение перехвачено: " + e.getMessage());
+        System.out.println("=== Ситуация 1: Одинаковая обработка разных исключений ===");
+        
+        try {
+            someMethod1(0);
+        } catch (ArithmeticException | IllegalArgumentException e) {
+
+            System.out.println("Ошибка в вычислениях: " + e.getMessage());
         }
         
-        System.out.println("\n=== Пример с НЕперехваченным исключением ===");
+        System.out.println("\n=== Ситуация 2: Иерархия исключений ===");
         
-        int[] numbers = {1, 2, 3};
-        System.out.println("Обращаемся к элементу массива: " + numbers[5]);
+        try {
+            someMethod2(-1);
+        } catch (RuntimeException e) { //Можно поменять на Exception2
+            System.out.println("Ошибка: " + e.getMessage());
+        }
     }
 }
