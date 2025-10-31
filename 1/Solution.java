@@ -1,5 +1,4 @@
-import java.util.Formatter;
-import java.util.Date;
+import java.io.*;
 /**
  * Демонстрация работы со StringBuilder
  * @author Dmitriy Shevtsov
@@ -7,48 +6,25 @@ import java.util.Date;
  * @since 2025
  */
 public class Solution {
-    static class AgeValidationException extends Exception {
-        private final int enteredAge;
 
-        public AgeValidationException() {
-            super("Ошибка валидации возраста");
-            this.enteredAge = 0;
-        }
-
-        public AgeValidationException(String message) {
-            super(message);
-            this.enteredAge = 0;
-        }
-
-        public AgeValidationException(String message, int age) {
-            super(message);
-            this.enteredAge = age;
-        }
-
-        public int getEnteredAge() {
-            return enteredAge;
-        }
-}
-    public static void validateAge(int age) throws AgeValidationException {
-        if (age < 0) {
-            throw new AgeValidationException("Возраст не может быть отрицательным", age);
-        }
-        if (age > 150) {
-            throw new AgeValidationException("Возраст слишком большой", age);
-        }
-        System.out.println("Возраст корректен: " + age);
-    }
     /**
      * @param args
      * @return void
-     * @see Показывает пример работы с собственным исключением
+     * @see Показывает пример работы с InputStream 
      */
     public static void main(String[] args) {
-        try {
-            validateAge(25);  // OK
-            validateAge(-5);  // Выбросит исключение
-        } catch (AgeValidationException e) {
-            System.out.println("Поймано AgeValidationException: " + e.getMessage() + ", с возрастом: " + e.getEnteredAge());
+        byte[] data = {65, 66, 67, 68, 69};
+        
+        try (ByteArrayInputStream input = new ByteArrayInputStream(data)) {
+            int byteRead;
+            System.out.println("Чтение байтов по одному:");
+
+            while ((byteRead = input.read()) != -1) {
+                System.out.println("Прочитан байт: " + byteRead + 
+                                 " -> символ: '" + (char)byteRead + "'");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }
