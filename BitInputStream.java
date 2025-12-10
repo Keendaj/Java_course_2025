@@ -13,16 +13,16 @@ public class BitInputStream implements AutoCloseable {
     }
 
     public int readBit() throws IOException {
-    if (numBitsRemaining == 0) {
-        currentByte = in.read();
-        if (currentByte == -1) {
-            return -1;
+        if (numBitsRemaining == 0) {
+            currentByte = in.read();
+            if (currentByte == -1) {
+                return -1;
+            }
+            numBitsRemaining = 8;
         }
-        numBitsRemaining = 8;
-    }
 
-    numBitsRemaining--;
-    return (currentByte >> numBitsRemaining) & 1; 
+        numBitsRemaining--;
+        return (currentByte >> numBitsRemaining) & 1; 
     }
 
 

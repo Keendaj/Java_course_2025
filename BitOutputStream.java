@@ -40,7 +40,7 @@ public class BitOutputStream implements AutoCloseable {
 
     public void flush() throws IOException {
         if (numBitsInCurrent > 0) { 
-            out.write(currentByte); // записываем последние биты как есть
+            out.write(currentByte);
             currentByte = 0;
             numBitsInCurrent = 0;
         }
